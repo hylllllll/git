@@ -1,0 +1,488 @@
+-- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+--
+-- Host: localhost    Database: tiantian
+-- ------------------------------------------------------
+-- Server version	5.7.20-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add group',2,'add_group'),(5,'Can change group',2,'change_group'),(6,'Can delete group',2,'delete_group'),(7,'Can add permission',3,'add_permission'),(8,'Can change permission',3,'change_permission'),(9,'Can delete permission',3,'delete_permission'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add user info',7,'add_userinfo'),(20,'Can change user info',7,'change_userinfo'),(21,'Can delete user info',7,'delete_userinfo'),(22,'Can add type info',8,'add_typeinfo'),(23,'Can change type info',8,'change_typeinfo'),(24,'Can delete type info',8,'delete_typeinfo'),(25,'Can add goods info',9,'add_goodsinfo'),(26,'Can change goods info',9,'change_goodsinfo'),(27,'Can delete goods info',9,'delete_goodsinfo'),(28,'Can add cart info',10,'add_cartinfo'),(29,'Can change cart info',10,'change_cartinfo'),(30,'Can delete cart info',10,'delete_cartinfo'),(31,'Can add order info',11,'add_orderinfo'),(32,'Can change order info',11,'change_orderinfo'),(33,'Can delete order info',11,'delete_orderinfo'),(34,'Can add order detail info',12,'add_orderdetailinfo'),(35,'Can change order detail info',12,'change_orderdetailinfo'),(36,'Can delete order detail info',12,'delete_orderdetailinfo');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$36000$DcIQLaDNKbXi$871jRPzG+y/YmN25WA5zTpW2Ui7m7EVF0weU0Z0HHHU=','2017-12-15 08:43:10.554254',1,'hanyulin','','','hanyulin218@163.com',1,1,'2017-12-10 07:31:40.931512');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_cart_cartinfo`
+--
+
+DROP TABLE IF EXISTS `df_cart_cartinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_cart_cartinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `count` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `df_cart_cartinfo_goods_id_4357294f_fk_df_goods_goodsinfo_id` (`goods_id`),
+  KEY `df_cart_cartinfo_user_id_db76e708_fk_df_user_userinfo_id` (`user_id`),
+  CONSTRAINT `df_cart_cartinfo_goods_id_4357294f_fk_df_goods_goodsinfo_id` FOREIGN KEY (`goods_id`) REFERENCES `df_goods_goodsinfo` (`id`),
+  CONSTRAINT `df_cart_cartinfo_user_id_db76e708_fk_df_user_userinfo_id` FOREIGN KEY (`user_id`) REFERENCES `df_user_userinfo` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_cart_cartinfo`
+--
+
+LOCK TABLES `df_cart_cartinfo` WRITE;
+/*!40000 ALTER TABLE `df_cart_cartinfo` DISABLE KEYS */;
+INSERT INTO `df_cart_cartinfo` VALUES (4,11,4,2),(5,61,76,2),(6,11,75,2);
+/*!40000 ALTER TABLE `df_cart_cartinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_goods_goodsinfo`
+--
+
+DROP TABLE IF EXISTS `df_goods_goodsinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_goods_goodsinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gtitle` varchar(20) NOT NULL,
+  `gpic` varchar(100) NOT NULL,
+  `gprice` decimal(5,2) NOT NULL,
+  `is_delete` tinyint(1) NOT NULL,
+  `gunit` varchar(20) NOT NULL,
+  `gclick` int(11) NOT NULL,
+  `gabstract` varchar(200) NOT NULL,
+  `gnum` int(11) NOT NULL,
+  `gdetail` longtext NOT NULL,
+  `gtype_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `df_goods_goodsinfo_gtype_id_63a02cef_fk_df_goods_typeinfo_id` (`gtype_id`),
+  CONSTRAINT `df_goods_goodsinfo_gtype_id_63a02cef_fk_df_goods_typeinfo_id` FOREIGN KEY (`gtype_id`) REFERENCES `df_goods_typeinfo` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_goods_goodsinfo`
+--
+
+LOCK TABLES `df_goods_goodsinfo` WRITE;
+/*!40000 ALTER TABLE `df_goods_goodsinfo` DISABLE KEYS */;
+INSERT INTO `df_goods_goodsinfo` VALUES (1,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(2,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(3,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(4,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(5,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(6,'扇贝','df_goods/goods019.jpg',85.00,0,'500g',54,'垃圾扇贝',45,'<p>这扇贝很难吃</p>',2),(7,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(8,'基围虾','df_goods/goods021_HbD8wfn.jpg',57.00,0,'500g',84,'这是什么东西',53,'<p>这是什么东西啊</p>',2),(9,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(10,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(11,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(12,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(13,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(14,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(15,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(16,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(17,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(18,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(19,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(20,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(21,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(22,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(23,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(24,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(25,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(26,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(27,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(28,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(29,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(30,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(31,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(32,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(33,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(34,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(35,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(36,'基围虾','df_goods/goods021_HbD8wfn.jpg',57.00,0,'500g',84,'这是什么东西',53,'<p>这是什么东西啊</p>',2),(37,'扇贝','df_goods/goods019.jpg',85.00,0,'500g',54,'垃圾扇贝',45,'<p>这扇贝很难吃</p>',2),(38,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(39,'河虾','df_goods/goods021.jpg',58.80,0,'500g',50,'好吃的河虾',45,'<p>hanyulin说这是好吃的河虾</p>',2),(40,'基围虾','df_goods/goods021_HbD8wfn.jpg',57.00,0,'500g',84,'这是什么东西',53,'<p>这是什么东西啊</p>',2),(41,'扇贝','df_goods/goods019.jpg',85.00,0,'500g',54,'垃圾扇贝',45,'<p>这扇贝很难吃</p>',2),(42,'冷冻秋刀鱼','df_goods/goods020.jpg',54.00,0,'500g',57,'冷冻鱼都难吃',75,'<p>相信我，冷冻鱼都难吃</p>',2),(43,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(44,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(45,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(46,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(47,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(48,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(49,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(50,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(51,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(52,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(53,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(54,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(55,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(56,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(57,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(58,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(59,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(60,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(61,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',8192,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(62,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(63,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',40,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(64,'葡萄','df_goods/goods.jpg',8.00,0,'500g',1280,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(65,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',0,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(66,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(67,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',0,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(68,'葡萄','df_goods/goods.jpg',8.00,0,'500g',0,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(69,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',0,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(70,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',0,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(71,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',0,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(72,'葡萄','df_goods/goods.jpg',8.00,0,'500g',0,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1),(73,'柠檬','df_goods/goods001.jpg',5.00,0,'500g',6,'很酸的柠檬',5,'<p>hanyulin说这是很酸的柠檬</p>',1),(74,'香蕉','df_goods/goods009.jpg',2.98,0,'500g',6,'香糯软甜',999,'<p>好吃的香蕉</p>',1),(75,'草莓','df_goods/goods_detail.jpg',20.00,0,'500g',9,'好吃的草莓-hanyulin',285,'<p>hanyulin说这是很好吃的草莓</p>',1),(76,'葡萄','df_goods/goods.jpg',8.00,0,'500g',51,'好吃的葡萄',99,'<p>hanyulin说这是和好吃的葡萄</p>',1);
+/*!40000 ALTER TABLE `df_goods_goodsinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_goods_typeinfo`
+--
+
+DROP TABLE IF EXISTS `df_goods_typeinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_goods_typeinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) NOT NULL,
+  `is_delete` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_goods_typeinfo`
+--
+
+LOCK TABLES `df_goods_typeinfo` WRITE;
+/*!40000 ALTER TABLE `df_goods_typeinfo` DISABLE KEYS */;
+INSERT INTO `df_goods_typeinfo` VALUES (1,'新鲜水果',0),(2,'海鲜水产',0),(3,'猪牛羊肉',0),(4,'禽类蛋品',0),(5,'新鲜蔬菜',0),(6,'速冻食品',0);
+/*!40000 ALTER TABLE `df_goods_typeinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_order_orderdetailinfo`
+--
+
+DROP TABLE IF EXISTS `df_order_orderdetailinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_order_orderdetailinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `price` decimal(5,2) NOT NULL,
+  `count` int(11) NOT NULL,
+  `goods_id` int(11) NOT NULL,
+  `order_id` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `df_order_orderdetail_goods_id_d0acef4d_fk_df_goods_` (`goods_id`),
+  KEY `df_order_orderdetail_order_id_b91dcf67_fk_df_order_` (`order_id`),
+  CONSTRAINT `df_order_orderdetail_goods_id_d0acef4d_fk_df_goods_` FOREIGN KEY (`goods_id`) REFERENCES `df_goods_goodsinfo` (`id`),
+  CONSTRAINT `df_order_orderdetail_order_id_b91dcf67_fk_df_order_` FOREIGN KEY (`order_id`) REFERENCES `df_order_orderinfo` (`oid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_order_orderdetailinfo`
+--
+
+LOCK TABLES `df_order_orderdetailinfo` WRITE;
+/*!40000 ALTER TABLE `df_order_orderdetailinfo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `df_order_orderdetailinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_order_orderinfo`
+--
+
+DROP TABLE IF EXISTS `df_order_orderinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_order_orderinfo` (
+  `oid` varchar(20) NOT NULL,
+  `odate` datetime(6) NOT NULL,
+  `opay` tinyint(1) NOT NULL,
+  `ototal` decimal(6,2) NOT NULL,
+  `oaddr` varchar(150) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`oid`),
+  KEY `df_order_orderinfo_user_id_2d705949_fk_df_user_userinfo_id` (`user_id`),
+  CONSTRAINT `df_order_orderinfo_user_id_2d705949_fk_df_user_userinfo_id` FOREIGN KEY (`user_id`) REFERENCES `df_user_userinfo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_order_orderinfo`
+--
+
+LOCK TABLES `df_order_orderinfo` WRITE;
+/*!40000 ALTER TABLE `df_order_orderinfo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `df_order_orderinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `df_user_userinfo`
+--
+
+DROP TABLE IF EXISTS `df_user_userinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `df_user_userinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uname` varchar(20) NOT NULL,
+  `upwd` varchar(40) NOT NULL,
+  `uemail` varchar(30) NOT NULL,
+  `ushou` varchar(20) NOT NULL,
+  `uaddr` varchar(100) NOT NULL,
+  `upost` varchar(6) NOT NULL,
+  `uphone` varchar(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `df_user_userinfo`
+--
+
+LOCK TABLES `df_user_userinfo` WRITE;
+/*!40000 ALTER TABLE `df_user_userinfo` DISABLE KEYS */;
+INSERT INTO `df_user_userinfo` VALUES (1,'hanyulin','f245e4299222289f2c79615565a949517265defd','hanyulin218@163.com','hanyulin','上海浦东','200090','13200000000'),(2,'han','7c4a8d09ca3762af61e59520943dc26494f8941b','hanyulin218@163.com','','','','');
+/*!40000 ALTER TABLE `df_user_userinfo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2017-12-12 06:56:15.947123','1','草莓',1,'[{\"added\": {}}]',9,1),(2,'2017-12-12 06:58:11.661501','2','葡萄',1,'[{\"added\": {}}]',9,1),(3,'2017-12-12 06:59:33.004635','3','柠檬',1,'[{\"added\": {}}]',9,1),(4,'2017-12-12 07:00:44.013490','4','香蕉',1,'[{\"added\": {}}]',9,1),(5,'2017-12-12 07:16:03.166142','1','新鲜水果',2,'[{\"changed\": {\"object\": \"\\u9999\\u8549\", \"fields\": [\"gpic\"], \"name\": \"goods info\"}}]',8,1),(6,'2017-12-12 07:17:40.837727','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(7,'2017-12-12 07:18:21.547054','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(8,'2017-12-12 07:19:07.572405','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(9,'2017-12-12 07:19:52.299053','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(10,'2017-12-12 07:20:49.314863','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(11,'2017-12-12 07:21:36.909762','4','香蕉',2,'[{\"changed\": {\"fields\": [\"gpic\"]}}]',9,1),(12,'2017-12-12 08:21:26.297127','5','河虾',1,'[{\"added\": {}}]',9,1),(13,'2017-12-12 08:22:14.349602','6','扇贝',1,'[{\"added\": {}}]',9,1),(14,'2017-12-12 08:23:10.314486','7','冷冻秋刀鱼',1,'[{\"added\": {}}]',9,1),(15,'2017-12-12 08:23:56.459143','8','基围虾',1,'[{\"added\": {}}]',9,1);
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(2,'auth','group'),(3,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(10,'df_cart','cartinfo'),(9,'df_goods','goodsinfo'),(8,'df_goods','typeinfo'),(12,'df_order','orderdetailinfo'),(11,'df_order','orderinfo'),(7,'df_user','userinfo'),(6,'sessions','session');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'df_user','0001_initial','2017-12-09 19:02:33.742439'),(2,'contenttypes','0001_initial','2017-12-09 19:02:51.642113'),(3,'auth','0001_initial','2017-12-09 19:03:00.225721'),(4,'admin','0001_initial','2017-12-09 19:03:02.444373'),(5,'admin','0002_logentry_remove_auto_add','2017-12-09 19:03:02.654993'),(6,'contenttypes','0002_remove_content_type_name','2017-12-09 19:03:03.739037'),(7,'auth','0002_alter_permission_name_max_length','2017-12-09 19:03:04.430307'),(8,'auth','0003_alter_user_email_max_length','2017-12-09 19:03:05.122359'),(9,'auth','0004_alter_user_username_opts','2017-12-09 19:03:05.161324'),(10,'auth','0005_alter_user_last_login_null','2017-12-09 19:03:05.687066'),(11,'auth','0006_require_contenttypes_0002','2017-12-09 19:03:05.726484'),(12,'auth','0007_alter_validators_add_error_messages','2017-12-09 19:03:05.766815'),(13,'auth','0008_alter_user_username_max_length','2017-12-09 19:03:06.694576'),(14,'sessions','0001_initial','2017-12-09 19:03:07.240361'),(15,'df_user','0002_auto_20171210_1531','2017-12-10 07:31:12.723498'),(16,'df_goods','0001_initial','2017-12-12 03:07:31.692562'),(17,'df_cart','0001_initial','2017-12-14 08:05:25.168196'),(18,'df_order','0001_initial','2017-12-15 08:52:11.508283');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('5t1opudp67aod5qz5yz68zlyt201ucyd','OWRjYTMxYzljNWMzMTNhOTJkZTkzOTYzYTE1YzMxMDM5YzNiNWE4NTp7InVuYW1lIjoiaGFueXVsaW4iLCJpZCI6MX0=','2017-12-25 11:24:39.105332'),('mgw5rz5mi4e0eq4n1llbz68mjpv86w1c','OWRjYTMxYzljNWMzMTNhOTJkZTkzOTYzYTE1YzMxMDM5YzNiNWE4NTp7InVuYW1lIjoiaGFueXVsaW4iLCJpZCI6MX0=','2017-12-25 15:30:39.659210'),('nam5jp09ymk2u7f42fv0hhb7hu4du44u','ZjdhNzE1ZDQzZGIzZjYxOTRjZDM3ZThhMWU2OTRlNzI2MmM5M2QwYjp7Il9hdXRoX3VzZXJfaGFzaCI6IjIxNmY5ZWYyOThhMGEwZmNkNmJiZWE3NGM1ZjJhOTMzZjA3MGYxYzUiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=','2017-12-24 08:15:34.490277'),('t7tqymxvlobyosmf6j8dppxbjwjn4l80','ODk2NmFlYWY1YmRjYTg5N2JhYTBjZTRhODZkZjMxOGM2NGQ1YTRiNjp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwidW5hbWUiOiJoYW4iLCJfYXV0aF91c2VyX2hhc2giOiIyMTZmOWVmMjk4YTBhMGZjZDZiYmVhNzRjNWYyYTkzM2YwNzBmMWM1IiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJpZCI6Mn0=','2017-12-29 09:13:02.341684');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-12-24 15:33:41
